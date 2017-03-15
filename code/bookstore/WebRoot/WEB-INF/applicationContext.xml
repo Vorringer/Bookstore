@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/bookstore">
+		</property>
+		<property name="username" value="root"></property>
+		<property name="password" value="root"></property>
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/demo/pojo/Order.hbm.xml</value>
+				<value>com/demo/pojo/Book.hbm.xml</value>
+				<value>com/demo/pojo/Cart.hbm.xml</value>
+				<value>com/demo/pojo/Orderinfo.hbm.xml</value>
+				<value>com/demo/pojo/User.hbm.xml</value></list>
+		</property>
+		</bean>   
+		 
+<bean id="userDao" class="com.mystore.dao.UserDAO" scope="singleton">    
+<property name="sessionFactory"  ref="sessionFactory"></property>   
+</bean>
+<bean id="bookDao" class="com.mystore.dao.BookDAO" scope="singleton">    
+<property name="sessionFactory"  ref="sessionFactory"></property>   
+</bean>
+<bean id="cartDao" class="com.mystore.dao.CartDAO" scope="singleton">    
+<property name="sessionFactory"  ref="sessionFactory"></property>   
+</bean>
+<bean id="orderDao" class="com.mystore.dao.OrderDAO" scope="singleton">    
+<property name="sessionFactory"  ref="sessionFactory"></property>   
+</bean>
+<bean id="orderinfoDao" class="com.mystore.dao.OrderinfoDAO" scope="singleton">    
+<property name="sessionFactory"  ref="sessionFactory"></property>   
+</bean>
+ <bean id="userService" class="com.mystore.service.UserService">   
+<property name="userDao" ref="userDao"></property>  
+</bean> 
+  <bean id="userAction" class="com.mystore.action.UserAction">    
+ <property name="userService" ref="userService"></property>   
+ </bean>   
+  <bean id="registerService" class="com.mystore.service.RegisterService">   
+<property name="userDao" ref="userDao"></property>  
+</bean>  
+  <bean id="registerAction" class="com.mystore.action.RegisterAction">    
+ <property name="registerService" ref="registerService"></property>   
+ </bean>
+ <bean id="loginService" class="com.mystore.service.LoginService">   
+<property name="userDao" ref="userDao"></property>  
+</bean>  
+  <bean id="loginAction" class="com.mystore.action.LoginAction">    
+ <property name="loginService" ref="loginService"></property>   
+ </bean>
+ <bean id="bookService" class="com.mystore.service.BookService">   
+<property name="bookDao" ref="bookDao"></property>  
+</bean>  
+  <bean id="bookAction" class="com.mystore.action.BookAction">    
+ <property name="bookService" ref="bookService"></property>   
+ </bean>
+  <bean id="cartService" class="com.mystore.service.CartService">   
+<property name="cartDao" ref="cartDao"></property>  
+</bean> 
+  <bean id="cartAction" class="com.mystore.action.CartAction">    
+ <property name="cartService" ref="cartService"></property>   
+ </bean> 
+  <bean id="orderService" class="com.mystore.service.OrderService">   
+<property name="orderDao" ref="orderDao"></property>  
+</bean>  
+  <bean id="orderAction" class="com.mystore.action.OrderAction">    
+ <property name="orderService" ref="orderService"></property>  
+  <property name="orderinfoService" ref="orderinfoService"></property>    
+ </bean> 
+  <bean id="orderinfoService" class="com.mystore.service.OrderinfoService">   
+<property name="orderinfoDao" ref="orderinfoDao"></property>  
+</bean>  
+ 
+ </beans>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+<constant name="struts.i18n.encoding" value="utf-8"/>
+<package name="registerp" extends="struts-default">   
+<action name="registerA" class="com.mystore.action.RegisterAction">     
+<result name="SUCCESS">/index.jsp</result>  
+<result name="FAILED">/fail.jsp</result> 
+</action>
+</package>
+
+<package name="loginp" extends="struts-default">   
+<action name="loginA" class="com.mystore.action.LoginAction">     
+<result name="SUCCESS">/index.jsp</result>  
+<result name="FAILED">/fail.jsp</result> 
+</action>
+</package>
+
+<package name="bookp" extends="struts-default">   
+<action name="bookA" class="com.mystore.action.BookAction">     
+<result name="SUCCESS">/index.jsp</result>  
+<result name="ADMIN">/admin.jsp</result>  
+</action>
+</package>
+
+<package name="userp" extends="struts-default">   
+<action name="userA" class="com.mystore.action.UserAction">     
+<result name="SUCCESS">/index.jsp</result> 
+<result name="USER">/usercenter.jsp</result> 
+</action>
+</package>
+
+<package name="cartp" extends="struts-default">   
+<action name="cartA" class="com.mystore.action.CartAction">     
+<result name="SUCCESS">/index.jsp</result> 
+<result name="PAY" type="redirect">/pay.jsp?selects=${selects}</result>  
+</action>
+</package>
+
+<package name="orderp" extends="struts-default">   
+<action name="orderA" class="com.mystore.action.OrderAction">     
+<result name="SUCCESS">/index.jsp</result>  
+</action>
+</package>
+
+</struts> 

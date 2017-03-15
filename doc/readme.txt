@@ -1,0 +1,2 @@
+数据库配置：iter3_database.sql
+书店管理员admin admin
